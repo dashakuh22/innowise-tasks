@@ -2,20 +2,23 @@
 
 namespace src;
 
-class Task2 {
-
-    public function updateDate($dateString){
+class Task2
+{
+    public function updateDate($dateString)
+    {
         $suppliedDate = new \DateTime($dateString);
         $currentYear = (int)(new \DateTime())->format('Y');
         return (new \DateTime())->setDate(
             $currentYear,
             (int)$suppliedDate->format('m'),
-            (int)$suppliedDate->format('d'));
+            (int)$suppliedDate->format('d')
+        );
     }
 
-    public function main(string $date) {
+    public function main(string $date)
+    {
         $date_parts = explode('.', $date);
-        if(!checkdate($date_parts[1], $date_parts[0], $date_parts[2])) {
+        if (!checkdate($date_parts[1], $date_parts[0], $date_parts[2])) {
             throw new \InvalidArgumentException();
         }
 
@@ -24,12 +27,11 @@ class Task2 {
 
         $cur = \DateTime::createFromFormat('d.m.Y', date_create('now')->format('d.m.Y'));
 
-        if($cur > $inp) {
+        if ($cur > $inp) {
             $date = $inp->modify('+1 year')->format('d.m.Y');
             $inp = \DateTime::createFromFormat('d.m.Y', $date);
         }
 
         return $cur->diff($inp)->format('%a');
     }
-
 }
