@@ -9,7 +9,7 @@ class Task1
 {
     public array $result = ['More than 30', 'More than 20', 'More than 10', 'Equal or less than 10'];
 
-    public function main(int $inputNumber)
+    public function main(int $inputNumber): string
     {
         try {
             return $inputNumber > 30 ?
