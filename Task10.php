@@ -26,8 +26,3 @@ class Task10
         }
     }
 }
-
-$t = new Task10();
-echo '<pre>';
-print_r($t->main('12'));
-echo '</pre>';
