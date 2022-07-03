@@ -7,39 +7,29 @@ use InvalidArgumentException;
 
 class Task8
 {
-    function print_recursive($arr) {
-        if($arr) {
-            foreach ($arr as $key => $val) {
-                if (is_array($key)) {
-                    print_recursive($key);
-                } else {
-                    echo("$key: $val <br>");
-                }
+    public function print_recursive($arr, &$res)
+    {
+        foreach ($arr as $key => $val) {
+            if (gettype($val) == 'string') {
+                $res .= "$key: $val <br>";
+            } else {
+                $this->print_recursive($val, $res);
             }
         }
-        return;
+
+        return $res;
     }
 
     public function main(string $json): string
     {
         try {
-            $res = json_decode($json);
-            echo '<pre>';
-            $this->print_recursive($res);
-            echo '</pre>';
-            return $res;
+            $json_decoded = json_decode($json);
+            $result = '';
+            $this->print_recursive($json_decoded, $result);
+
+            return $result;
         } catch (Exception $ex) {
-            throw new InvalidArgumentException("Invalid arguments provided. Check inputs. Must be a json string.");
+            throw new InvalidArgumentException('Invalid arguments provided. Check inputs. Must be a json string.');
         }
     }
 }
-
-$t = new Task8();
-print_r($t->main('{
-        "Title": "The Cuckoos Calling",
-        "Author": "Robert Galbraith",
-        "Detail": {
-        "Publisher": "Little Brown"
-        }
-        }')
-);
