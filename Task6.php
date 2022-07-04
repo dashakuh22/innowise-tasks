@@ -2,7 +2,6 @@
 
 namespace src;
 
-use Exception;
 use InvalidArgumentException;
 
 class Task6
@@ -10,41 +9,37 @@ class Task6
     public string $START = '01.01.1980';
     public string $END = '31.12.1999';
 
+    public function checkRange($date): bool
+    {
+        $date = strtotime($date);
+        return $date >= strtotime($this->START) && $date <= strtotime($this->END);
+    }
+
     public function dayCount($day, $startDate, $endDate, $counter): int
     {
-        try {
-            if (strtotime($startDate) > strtotime($endDate)) {
-                return $counter;
-            } else {
-                if (date('l', strtotime($startDate)) == $day) {
-                    $counter++;
-                }
-
-                return $this->dayCount(
-                    $day,
-                    date_create($startDate)->modify('first day of next month')->format('d.m.Y'),
-                    $endDate,
-                    $counter
-                );
+        if (strtotime($startDate) > strtotime($endDate)) {
+            return $counter;
+        } else {
+            if (date('l', strtotime($startDate)) == $day) {
+                $counter++;
             }
-        } catch (Exception $ex) {
-            throw new InvalidArgumentException();
+
+            return $this->dayCount(
+                $day,
+                date_create($startDate)->modify('first day of next month')->format('d.m.Y'),
+                $endDate,
+                $counter
+            );
         }
     }
 
     public function main(int $year, int $lastYear, int $month, int $lastMonth, string $day = 'Monday'): int
     {
-        $date = '01.'.$month.'.'.$year;
-        $lastDate = '01.'.$lastMonth.'.'.$lastYear;
+        $date = '01.' . $month . '.' . $year;
+        $lastDate = '01.' . $lastMonth . '.' . $lastYear;
 
-        $date_time = strtotime($date);
-        $lastdate_time = strtotime($lastDate);
-        $this->START = strtotime($this->START);
-        $this->END = strtotime($this->END);
-
-        if (checkdate($month, '01', $year) && checkdate($lastMonth, '01', $lastYear) &&
-             $date_time > $this->START && $date_time < $this->END &&
-             $lastdate_time > $this->START && $lastdate_time < $this->END) {
+        if (checkdate($month, '01', $year) && checkdate($lastMonth, '01', $lastYear)
+            && $this->checkRange($date) && $this->checkRange($lastDate)) {
             return $this->dayCount(
                 $day,
                 date_create($date)->format('d.m.Y'),
