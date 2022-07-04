@@ -32,7 +32,7 @@ class Task5
         $F[1][1] = $w;
     }
 
-    public function power(&$F, $n)
+    public function power(&$F, $n): void
     {
         $M = [[1, 1], [1, 0]];
         do {
