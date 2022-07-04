@@ -10,14 +10,13 @@ class Task6
     public string $START = '01.01.1980';
     public string $END = '31.12.1999';
 
-    public function dayCount($day, $startDate, $endDate, $counter, &$dates): string
+    public function dayCount($day, $startDate, $endDate, $counter): int
     {
         try {
             if (strtotime($startDate) > strtotime($endDate)) {
-                return 'Count of '.$day.'s<br>'.$counter.'<br>'.$dates;
+                return $counter;
             } else {
                 if (date('l', strtotime($startDate)) == $day) {
-                    $dates .= $startDate.'<br>';
                     $counter++;
                 }
 
@@ -25,8 +24,7 @@ class Task6
                     $day,
                     date_create($startDate)->modify('first day of next month')->format('d.m.Y'),
                     $endDate,
-                    $counter,
-                    $dates
+                    $counter
                 );
             }
         } catch (Exception $ex) {
@@ -34,7 +32,7 @@ class Task6
         }
     }
 
-    public function main(int $year, int $lastYear, int $month, int $lastMonth, string $day = 'Monday'): string
+    public function main(int $year, int $lastYear, int $month, int $lastMonth, string $day = 'Monday'): int
     {
         $date = '01.'.$month.'.'.$year;
         $lastDate = '01.'.$lastMonth.'.'.$lastYear;
@@ -51,8 +49,7 @@ class Task6
                 $day,
                 date_create($date)->format('d.m.Y'),
                 date_create($lastDate)->format('d.m.Y'),
-                0,
-                $appropriate_dates
+                0
             );
         } else {
             throw new InvalidArgumentException('Invalid arguments received. Check inputs.');
