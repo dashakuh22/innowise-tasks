@@ -17,7 +17,6 @@ class Task4
             }
 
             return implode('', $words);
-
         } catch (Exception $ex) {
             throw new InvalidArgumentException();
         }
