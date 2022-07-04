@@ -3,18 +3,15 @@
 namespace src;
 
 use DateTime;
-use Exception;
 use InvalidArgumentException;
 
 class Task2
 {
-    /**
-     * @throws Exception
-     */
     public function updateDate($dateString): DateTime
     {
         $suppliedDate = new DateTime($dateString);
         $currentYear = (int)(new DateTime())->format('Y');
+
         return (new DateTime())->setDate(
             $currentYear,
             (int)$suppliedDate->format('m'),
@@ -22,9 +19,6 @@ class Task2
         );
     }
 
-    /**
-     * @throws Exception
-     */
     public function main(string $date): string
     {
         $date_parts = explode('.', $date);
