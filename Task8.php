@@ -20,14 +20,15 @@ class Task8
         return $res;
     }
 
-    public function main(string $json): string
+    public function main(string $json)
     {
         try {
             $json_decoded = json_decode($json);
             $result = '';
             $this->print_recursive($json_decoded, $result);
-
-            return $result;
+            echo '<pre>';
+            echo $result;
+            echo '</pre>';
         } catch (Exception $ex) {
             throw new InvalidArgumentException('Invalid arguments provided. Check inputs. Must be a json string.');
         }
