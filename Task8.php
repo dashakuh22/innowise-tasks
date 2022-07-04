@@ -2,7 +2,6 @@
 
 namespace src;
 
-use Exception;
 use InvalidArgumentException;
 
 class Task8
@@ -20,17 +19,31 @@ class Task8
         return $res;
     }
 
-    public function main(string $json)
+    public function main(string $json): string
     {
-        try {
-            $json_decoded = json_decode($json);
+        $json_decoded = json_decode($json);
+        if (is_object($json_decoded) && json_last_error() === JSON_ERROR_NONE) {
             $result = '';
             $this->print_recursive($json_decoded, $result);
-            echo '<pre>';
-            echo $result;
-            echo '</pre>';
-        } catch (Exception $ex) {
+
+            return $result;
+        } else {
             throw new InvalidArgumentException('Invalid arguments provided. Check inputs. Must be a json string.');
         }
     }
 }
+
+/*$str = '{
+"Title": "The Cuckoos Calling",
+"Author": "Robert Galbraith",
+"Detail": {
+"Publisher": {
+"Last name": "Brown",
+"First name": "Little"
+}
+}
+}
+';*/
+/*$str = '44';
+$t = new Task8();
+echo $t->main($str);*/
