@@ -2,15 +2,16 @@
 
 namespace src;
 
+use Exception;
 use InvalidArgumentException;
 
-class Calculator
+class Task12
 {
     protected float $lhs;
     protected float $rhs;
     protected float $res;
 
-    public function __construct(float $lhs, float $rhs)
+    public function __construct(float $lhs = 0, float $rhs = 0)
     {
         $this->lhs = $lhs;
         $this->rhs = $rhs;
@@ -18,28 +19,35 @@ class Calculator
 
     public function getResult(): float
     {
-        return $this->res;
+        try {
+            return $this->res;
+        } catch (Exception $ex) {
+            throw new InvalidArgumentException('Any operation must to be done');
+        }
     }
 
-    public function add(): Calculator
+    public function add(): Task12
     {
         $this->res = $this->lhs + $this->rhs;
+
         return $this;
     }
 
-    public function sub(): Calculator
+    public function sub(): Task12
     {
         $this->res = $this->lhs - $this->rhs;
+
         return $this;
     }
 
-    public function multiply(): Calculator
+    public function multiply(): Task12
     {
         $this->res = $this->lhs * $this->rhs;
+
         return $this;
     }
 
-    public function divideBy($divider = 1): Calculator
+    public function divideBy($divider = 1): Task12
     {
         if ($divider == 0) {
             throw new InvalidArgumentException('Division by zero');
@@ -49,3 +57,6 @@ class Calculator
         return $this;
     }
 }
+
+//$t = new Task12(12, 6);
+//echo $t->sub()->divideBy(9)->divideBy(2)->getResult();
