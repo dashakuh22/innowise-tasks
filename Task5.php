@@ -4,7 +4,7 @@ namespace src;
 
 class Task5
 {
-    public function fib_by_len($n): int
+    public function fib_by_len($n): float
     {
         $F = [[1, 1], [1, 0]];
         if ($n == 0) {
@@ -15,7 +15,7 @@ class Task5
         return $F[0][0];
     }
 
-    public function multiply(&$F, $M)
+    public function multiply(&$F, $M): void
     {
         $x = $F[0][0] * $M[0][0] +
             $F[0][1] * $M[1][0];
@@ -38,12 +38,15 @@ class Task5
         do {
             $this->multiply($F, $M);
             $cur = number_format($F[0][0], 0, '', '');
-            echo 'Cur: '.$cur.'<br>';
+//            echo 'Cur: '.$cur.'<br>';
         } while (strlen($cur) < $n + 1);
     }
 
-    public function main(int $n): int
+    public function main(int $n): float
     {
         return $this->fib_by_len($n);
     }
 }
+
+//$t = new Task5();
+//echo $t->main(101);
