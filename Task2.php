@@ -3,13 +3,33 @@
 namespace src;
 
 use DateTime;
+use Exception;
 use InvalidArgumentException;
 
 class Task2
 {
+    public function checkInput(array $input): bool
+    {
+        if (sizeof($input) == 3) {
+            foreach ($input as $value) {
+                if (!intval($value)) {
+                    return false;
+                }
+            }
+
+            return checkdate($input[1], $input[0], $input[2]);
+        }
+
+        return false;
+    }
+
     public function updateDate($dateString): DateTime
     {
-        $suppliedDate = new DateTime($dateString);
+        try {
+            $suppliedDate = new DateTime($dateString);
+        } catch (Exception $e) {
+            throw new InvalidArgumentException();
+        }
         $currentYear = (int)(new DateTime())->format('Y');
 
         return (new DateTime())->setDate(
@@ -21,9 +41,14 @@ class Task2
 
     public function main(string $date): string
     {
+        if (func_num_args() != 1) {
+            throw new InvalidArgumentException('Too many arguments');
+        }
+
         $date_parts = explode('.', $date);
-        if (!checkdate($date_parts[1], $date_parts[0], $date_parts[2])) {
-            throw new InvalidArgumentException();
+
+        if (!$this->checkInput($date_parts)) {
+            throw new InvalidArgumentException('Bad input');
         }
 
         $date = $this->updateDate($date)->format('d.m.Y');
@@ -39,3 +64,9 @@ class Task2
         return $cur->diff($inp)->format('%a');
     }
 }
+
+
+/*$t = new Task2();
+echo '<pre>';
+echo $t->main('14.10.2021', '14');
+echo '</pre>';*/
