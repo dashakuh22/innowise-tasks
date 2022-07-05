@@ -10,7 +10,7 @@ class Task5
         if ($n == 0) {
             return 0;
         }
-        $this->power($F, $n - 1);
+        $this->power($F, $n);
 
         return $F[0][0];
     }
@@ -39,7 +39,7 @@ class Task5
             $this->multiply($F, $M);
             $cur = number_format($F[0][0], 0, '', '');
 //            echo 'Cur: '.$cur.'<br>';
-        } while (strlen($cur) < $n + 1);
+        } while (strlen($cur) < $n);
     }
 
     public function main(int $n): float
