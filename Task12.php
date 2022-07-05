@@ -2,7 +2,6 @@
 
 namespace src;
 
-use Exception;
 use InvalidArgumentException;
 
 class Task12
@@ -19,10 +18,10 @@ class Task12
 
     public function getResult(): float
     {
-        try {
+        if (isset($this->res)) {
             return $this->res;
-        } catch (Exception $ex) {
-            throw new InvalidArgumentException('Any operation must to be done');
+        } else {
+            throw new InvalidArgumentException('Any operation must to be set');
         }
     }
 
@@ -58,5 +57,6 @@ class Task12
     }
 }
 
-//$t = new Task12(12, 6);
-//echo $t->sub()->divideBy(9)->divideBy(2)->getResult();
+//$t = new Task12(-6, 6);
+//echo $t->getResult();
+//echo $t->multiply()->divideBy(-2)->getResult();
