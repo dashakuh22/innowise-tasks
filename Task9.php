@@ -19,7 +19,7 @@ class Task9
 
     public function main(array $arr, int $number): array
     {
-        if (is_array($arr) && is_int($number) && $this->arrayHasOnlyInts($arr)) {
+        if (is_array($arr) && is_int($number) && $number > 0 && $this->arrayHasOnlyInts($arr)) {
             $res = [];
             for ($i = 0; $i < sizeof($arr) - 2; $i++) {
                 if ($arr[$i] + $arr[$i + 1] + $arr[$i + 2] === $number) {
@@ -34,7 +34,7 @@ class Task9
     }
 }
 
-/*$t = new Task9();
-echo '<pre>';
-print_r($t->main([2, 7, 7, 1, 7, '-2', -7, -8, 9, 9, -2], 16));
-echo '</pre>';*/
+//$t = new Task9();
+//echo '<pre>';
+//print_r($t->main([2, 7, 7, 1, 7, '-2', -7, -8, 9, 9, -2], -1));
+//echo '</pre>';
