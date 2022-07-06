@@ -8,18 +8,19 @@ use InvalidArgumentException;
 
 class Task2
 {
-    public function checkInput(array $input): bool
+    public function checkInput(string $input): bool
     {
-        if (sizeof($input) == 3) {
-            foreach ($input as $value) {
-                if (!intval($value)) {
-                    return false;
+        $date_parts = explode('.', $input);
+        if (preg_match('/\d{2}.\d{2}.\d{4}/', $input)) {
+            if (sizeof($date_parts) == 3) {
+                foreach ($date_parts as $value) {
+                    if (!intval($value)) {
+                        return false;
+                    }
                 }
+                return checkdate($date_parts[1], $date_parts[0], $date_parts[2]);
             }
-
-            return checkdate($input[1], $input[0], $input[2]);
         }
-
         return false;
     }
 
@@ -27,7 +28,7 @@ class Task2
     {
         try {
             $suppliedDate = new DateTime($dateString);
-        } catch (Exception $e) {
+        } catch (Exception) {
             throw new InvalidArgumentException();
         }
         $currentYear = (int)(new DateTime())->format('Y');
@@ -45,9 +46,7 @@ class Task2
             throw new InvalidArgumentException('Too many arguments');
         }
 
-        $date_parts = explode('.', $date);
-
-        if (!$this->checkInput($date_parts)) {
+        if (!$this->checkInput($date)) {
             throw new InvalidArgumentException('Bad input');
         }
 
@@ -68,5 +67,8 @@ class Task2
 
 /*$t = new Task2();
 echo '<pre>';
-echo $t->main('14.10.2021', '14');
+//echo $t->main('14.10.2021', '14');
+echo '<br>';
+echo $t->main();
+echo '<br>';
 echo '</pre>';*/
