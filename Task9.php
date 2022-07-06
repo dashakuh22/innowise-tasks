@@ -17,9 +17,21 @@ class Task9
         return true;
     }
 
+    public function checkInput(array $arr, float|int $num): bool
+    {
+        if (!is_array($arr) || sizeof($arr) < 3 || !$this->arrayHasOnlyInts($arr)) {
+            return false;
+        }
+        if (!is_int($num) || $num < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function main(array $arr, int $number): array
     {
-        if (is_array($arr) && is_int($number) && $number > 0 && $this->arrayHasOnlyInts($arr)) {
+        if ($this->checkInput($arr, $number)) {
             $res = [];
             for ($i = 0; $i < sizeof($arr) - 2; $i++) {
                 if ($arr[$i] + $arr[$i + 1] + $arr[$i + 2] === $number) {
@@ -36,5 +48,5 @@ class Task9
 
 //$t = new Task9();
 //echo '<pre>';
-//print_r($t->main([0, 0, 1 + 10], 11));
+//print_r($t->main([0, '0', 0], 0));
 //echo '</pre>';
