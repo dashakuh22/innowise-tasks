@@ -29,8 +29,6 @@ class Task5
         $F[0][1] = $y;
         $F[1][0] = $z;
         $F[1][1] = $w;
-
-        return;
     }
 
     public function power(array &$F, int $n): void
@@ -40,8 +38,6 @@ class Task5
             $this->multiply($F, $M);
             $cur = number_format($F[0][0], 0, '', '');
         } while (strlen($cur) < $n);
-
-        return;
     }
 
     public function main(int $n): float
