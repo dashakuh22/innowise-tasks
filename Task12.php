@@ -2,6 +2,7 @@
 
 namespace src;
 
+use Exception;
 use InvalidArgumentException;
 
 class Task12
@@ -10,19 +11,24 @@ class Task12
     protected float $rhs;
     protected float $res;
 
-    public function __construct(float $lhs = 0, float $rhs = 0)
+    public function __construct(float|int $lhs, float|int $rhs)
     {
-        $this->lhs = $lhs;
+        try {
+            $this->lhs = $lhs;
+            $this->rhs = $rhs;
+        } catch (Exception $exception) {
+            throw new InvalidArgumentException('Bad parameters');
+        }
+    }
+
+    public function setRhs(float|int $rhs): void
+    {
         $this->rhs = $rhs;
     }
 
-    public function getResult(): float
+    public function setLhs(float|int $lhs): void
     {
-        if (isset($this->res)) {
-            return $this->res;
-        } else {
-            throw new InvalidArgumentException('Any operation must to be set');
-        }
+        $this->lhs = $lhs;
     }
 
     public function add(): Task12
@@ -46,7 +52,7 @@ class Task12
         return $this;
     }
 
-    public function divideBy($divider = 1): Task12
+    public function divideBy(float|int $divider): Task12
     {
         if ($divider == 0) {
             throw new InvalidArgumentException('Division by zero');
@@ -55,8 +61,16 @@ class Task12
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->res;
+    }
 }
 
-//$t = new Task12(-6, 6);
-//echo $t->getResult();
-//echo $t->multiply()->divideBy(-2)->getResult();
+/*
+echo '<pre>';
+$t = new Task12('1', '2');
+echo $t->add()->add()->divideBy(2);
+echo '</pre>';
+ */
