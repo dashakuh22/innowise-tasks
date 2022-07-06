@@ -2,7 +2,6 @@
 
 namespace src;
 
-use Exception;
 use InvalidArgumentException;
 
 class Task8
@@ -14,7 +13,7 @@ class Task8
         }
         foreach ($arr as $key => $val) {
             if (gettype($val) != 'object' && gettype($val) != 'array') {
-                $res .= "$key: $val <br>";
+                $res .= "$key: $val"."\r\n";
             } else {
                 $this->print_recursive($val, $res);
             }
@@ -37,8 +36,8 @@ class Task8
         }
     }
 }
-/*
-$t = new Task8();
+
+/*$t = new Task8();
 $str = '{
 "Title": "The Cuckoos Calling",
 "Author": "Robert Galbraith",
