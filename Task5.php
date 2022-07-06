@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 class Task5
 {
-    public function fib_by_len($n): float
+    public function fib_by_len(int $n): float
     {
         $F = [[1, 1], [1, 0]];
         $this->power($F, $n);
@@ -14,7 +14,7 @@ class Task5
         return $F[0][0];
     }
 
-    public function multiply(&$F, $M): void
+    public function multiply(array &$F, array $M): void
     {
         $x = $F[0][0] * $M[0][0] +
              $F[0][1] * $M[1][0];
@@ -29,16 +29,19 @@ class Task5
         $F[0][1] = $y;
         $F[1][0] = $z;
         $F[1][1] = $w;
+
+        return;
     }
 
-    public function power(&$F, $n): void
+    public function power(array &$F, int $n): void
     {
         $M = [[1, 1], [1, 0]];
         do {
             $this->multiply($F, $M);
             $cur = number_format($F[0][0], 0, '', '');
-//            echo 'Cur: '.$cur.'<br>';
         } while (strlen($cur) < $n);
+
+        return;
     }
 
     public function main(int $n): float
@@ -50,4 +53,3 @@ class Task5
         }
     }
 }
-
