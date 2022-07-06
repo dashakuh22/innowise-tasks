@@ -10,8 +10,8 @@ class Task2
 {
     public function checkInput(string $input): bool
     {
-        $date_parts = explode('.', $input);
-        if (preg_match('/\d{2}.\d{2}.\d{4}/', $input)) {
+        $date_parts = explode('-', $input);
+        if (preg_match('/\d{2}-\d{2}-\d{4}/', $input)) {
             if (sizeof($date_parts) == 3) {
                 foreach ($date_parts as $value) {
                     if (!intval($value)) {
@@ -53,15 +53,15 @@ class Task2
         }
 
         if (strtotime($date) < strtotime('now')) {
-            $date = $this->updateDate($date)->format('d.m.Y');
+            $date = $this->updateDate($date)->format('d-m-Y');
         }
 
-        $inp = DateTime::createFromFormat('d.m.Y', $date);
-        $cur = DateTime::createFromFormat('d.m.Y', date_create()->format('d.m.Y'));
+        $inp = DateTime::createFromFormat('d-m-Y', $date);
+        $cur = DateTime::createFromFormat('d-m-Y', date_create()->format('d-m-Y'));
 
         if ($cur > $inp) {
-            $date = $inp->modify('+1 year')->format('d.m.Y');
-            $inp = DateTime::createFromFormat('d.m.Y', $date);
+            $date = $inp->modify('+1 year')->format('d-m-Y');
+            $inp = DateTime::createFromFormat('d-m-Y', $date);
         }
 
         return $cur->diff($inp)->format('%a');
