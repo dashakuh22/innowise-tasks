@@ -62,6 +62,13 @@ class Task12
         return $this;
     }
 
+    public function multiplyBy(float|int $multiplier): Task12
+    {
+        $this->res = $this->res * $multiplier;
+
+        return $this;
+    }
+
     public function divideBy(float|int $divider): Task12
     {
         if ($divider == 0) {
@@ -80,5 +87,5 @@ class Task12
 
 /*echo '<pre>';
 $t = new Task12('1', '3');
-echo $t->divide();
+echo $t->divide()->multiplyBy(6);
 echo '</pre>';*/
