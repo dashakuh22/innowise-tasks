@@ -6,18 +6,21 @@ use InvalidArgumentException;
 
 class Task6
 {
-    public string $START = '01.01.1980';
+    public string $START = '01.01.1900';
     public string $END = '31.12.1999';
 
-    public function checkRange($date): bool
+    public array $WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    public function checkRange(string $date): bool
     {
         $date = strtotime($date);
+
         return $date >= strtotime($this->START) && $date <= strtotime($this->END);
     }
 
-    public function dayCount($day, $startDate, $endDate, $counter): int
+    public function dayCount(string $day, string $startDate, string $endDate, int $counter): int
     {
-        if (strtotime($startDate) > strtotime($endDate)) {
+        if (strtotime($startDate) >= strtotime($endDate)) {
             return $counter;
         } else {
             if (date('l', strtotime($startDate)) == $day) {
@@ -39,6 +42,7 @@ class Task6
         $lastDate = '01.' . $lastMonth . '.' . $lastYear;
 
         if (checkdate($month, '01', $year) && checkdate($lastMonth, '01', $lastYear)
+            && in_array($day, $this->WEEK_DAYS) && strtotime($date) < strtotime($lastDate)
             && $this->checkRange($date) && $this->checkRange($lastDate)) {
             return $this->dayCount(
                 $day,
@@ -47,10 +51,10 @@ class Task6
                 0
             );
         } else {
-            throw new InvalidArgumentException('Invalid arguments received. Check inputs.');
+            throw new InvalidArgumentException('Bad input.');
         }
     }
 }
 
 //$t = new Task6();
-//echo $t->main(1980, 1981, 2, 3);
+//echo $t->main(1980, 1981, 2, 3, 'Sunday');
