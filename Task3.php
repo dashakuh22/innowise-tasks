@@ -6,13 +6,13 @@ use InvalidArgumentException;
 
 class Task3
 {
-    public static function main(int $number): int
+    public function main(int $number): int
     {
-        if (strlen(strval(abs($number))) <= 1) {
+        if (strlen(strval(abs($number))) <= 1 || $number < 0) {
             throw new InvalidArgumentException('Bad input');
         }
 
-        $number_str = (string)abs($number);
+        $number_str = (string)$number;
         while (strlen($number_str) > 1) {
             $value = 0;
             for ($i = 0; $i < strlen($number_str); $i++) {
