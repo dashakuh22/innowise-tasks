@@ -78,9 +78,7 @@ class Task12
     }
 }
 
-
 /*echo '<pre>';
 $t = new Task12('1', '3');
 echo $t->divide();
 echo '</pre>';*/
-
