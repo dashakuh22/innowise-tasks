@@ -18,9 +18,11 @@ class Task2
                         return false;
                     }
                 }
+
                 return checkdate($date_parts[1], $date_parts[0], $date_parts[2]);
             }
         }
+
         return false;
     }
 
@@ -65,11 +67,3 @@ class Task2
         return $cur->diff($inp)->format('%a');
     }
 }
-
-//
-//$t = new Task2();
-//echo '<pre>';
-//echo $t->main('07.07.2024');
-//echo '<br>';
-//echo '<br>';
-//echo '</pre>';
