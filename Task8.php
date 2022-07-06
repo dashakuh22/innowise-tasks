@@ -6,14 +6,11 @@ use InvalidArgumentException;
 
 class Task8
 {
-    public function print_recursive($arr, string &$res): string
+    public function print_recursive($arr, array &$res): array
     {
-        if (is_string($arr) || is_integer($arr)) {
-            return $res = $arr;
-        }
         foreach ($arr as $key => $val) {
             if (gettype($val) != 'object' && gettype($val) != 'array') {
-                $res .= "$key: $val"."\r\n";
+                $res[] = "$key: $val";
             } else {
                 $this->print_recursive($val, $res);
             }
@@ -27,10 +24,10 @@ class Task8
         $json_decoded = json_decode($json);
 
         if (is_object($json_decoded) && json_last_error() === JSON_ERROR_NONE) {
-            $result = '';
+            $result = [];
             $this->print_recursive($json_decoded, $result);
 
-            return $result;
+            return implode("\r\n", $result);
         } else {
             throw new InvalidArgumentException('Bad input');
         }
@@ -46,4 +43,4 @@ $str = '{
 }
 }
 ';
-echo $t->main($str);*/
+var_dump($t->main($str));*/
