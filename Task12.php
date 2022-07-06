@@ -38,7 +38,7 @@ class Task12
         return $this;
     }
 
-    public function sub(): Task12
+    public function subtract(): Task12
     {
         $this->res = $this->lhs - $this->rhs;
 
@@ -48,6 +48,16 @@ class Task12
     public function multiply(): Task12
     {
         $this->res = $this->lhs * $this->rhs;
+
+        return $this;
+    }
+
+    public function divide(): Task12
+    {
+        if ($this->rhs == 0) {
+            throw new InvalidArgumentException('Division by zero');
+        }
+        $this->res = $this->lhs / $this->rhs;
 
         return $this;
     }
@@ -68,9 +78,9 @@ class Task12
     }
 }
 
-/*
-echo '<pre>';
-$t = new Task12('1', '2');
-echo $t->add()->add()->divideBy(2);
-echo '</pre>';
- */
+
+/*echo '<pre>';
+$t = new Task12('1', '3');
+echo $t->divide();
+echo '</pre>';*/
+
