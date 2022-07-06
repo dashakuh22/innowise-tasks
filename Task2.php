@@ -24,7 +24,7 @@ class Task2
         return false;
     }
 
-    public function updateDate($dateString): DateTime
+    public function updateDate(string $dateString): DateTime
     {
         try {
             $suppliedDate = new DateTime($dateString);
@@ -50,9 +50,11 @@ class Task2
             throw new InvalidArgumentException('Bad input');
         }
 
-        $date = $this->updateDate($date)->format('d.m.Y');
-        $inp = DateTime::createFromFormat('d.m.Y', $date);
+        if (strtotime($date) < strtotime('now')) {
+            $date = $this->updateDate($date)->format('d.m.Y');
+        }
 
+        $inp = DateTime::createFromFormat('d.m.Y', $date);
         $cur = DateTime::createFromFormat('d.m.Y', date_create()->format('d.m.Y'));
 
         if ($cur > $inp) {
@@ -64,11 +66,10 @@ class Task2
     }
 }
 
-
-/*$t = new Task2();
-echo '<pre>';
-//echo $t->main('14.10.2021', '14');
-echo '<br>';
-echo $t->main();
-echo '<br>';
-echo '</pre>';*/
+//
+//$t = new Task2();
+//echo '<pre>';
+//echo $t->main('07.07.2024');
+//echo '<br>';
+//echo '<br>';
+//echo '</pre>';
