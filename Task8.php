@@ -41,21 +41,25 @@ class Task8
         }
     }
 }
-/*
-$str = '{
-"Title": "The Cuckoos Calling",
-"Author": "Robert Galbraith",
-"Detail": {
-"Publisher": "Little Brown"
-}
-}
-';
+
 //$str = '[{"user_id":13,"username":"stack"},{"user_id":14,"username":"over"}]';
 //$str = '{"a": { "a.1":"Значение a1","a.2":"Значение a2"},"2":"Значение 2","3":"Значение 3","4":"Значение 4","5":"Значение 5"}';
 //$str = '{background-color:yellow;color:#000;padding:10px;width:650px;}';
 //$str = '[0,1,3]';
 //$str = '0123';
- */
-//$t = new Task8();
-//$str = 123;
-//echo $t->main($str);
+/*$t = new Task8();
+$str = '{
+"Title": "The Cuckoos Calling",
+"Author": "Robert Galbraith",
+"Detail": {
+    "Publisher": {
+        "FI": {
+            "Who": {
+                "Pseudonym": "Little Brown"
+                }
+            }
+        }
+    }
+}
+';
+echo $t->main($str);*/
