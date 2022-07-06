@@ -36,5 +36,5 @@ class Task9
 
 //$t = new Task9();
 //echo '<pre>';
-//print_r($t->main([2, 7, 7, 1, 7, '-2', -7, -8, 9, 9, -2], -1));
+//print_r($t->main([0, 0, 1 + 10], 11));
 //echo '</pre>';
