@@ -62,6 +62,20 @@ class Task12
         return $this;
     }
 
+    public function addBy(float|int $value): Task12
+    {
+        $this->res = $this->res + $value;
+
+        return $this;
+    }
+
+    public function subtractBy(float|int $value): Task12
+    {
+        $this->res = $this->res - $value;
+
+        return $this;
+    }
+
     public function multiplyBy(float|int $multiplier): Task12
     {
         $this->res = $this->res * $multiplier;
