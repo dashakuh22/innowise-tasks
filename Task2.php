@@ -59,11 +59,21 @@ class Task2
         $inp = DateTime::createFromFormat('d-m-Y', $date);
         $cur = DateTime::createFromFormat('d-m-Y', date_create()->format('d-m-Y'));
 
-        if ($cur > $inp) {
-            $date = $inp->modify('+1 year')->format('d-m-Y');
-            $inp = DateTime::createFromFormat('d-m-Y', $date);
+        $cur_temp = DateTime::createFromFormat('d-m-Y', date_create()->format('d-m-Y'))->modify('+1 year');
+        if ($cur_temp < $inp) {
+            throw new InvalidArgumentException('Bad input');
         }
 
         return $cur->diff($inp)->format('%a');
     }
 }
+
+/*$t = new Task2();
+echo $t->main('07-07-2022');
+echo '<br>';
+echo $t->main('09-07-2022');
+echo '<br>';
+echo $t->main('07-07-2023');
+echo '<br>';
+echo $t->main('08-07-2023');
+echo '<br>';*/
