@@ -42,7 +42,7 @@ class Task2
         );
     }
 
-    public function main(string $date): string
+    public function main(string $date): int
     {
         if (func_num_args() != 1) {
             throw new InvalidArgumentException('Too many arguments');
@@ -59,21 +59,19 @@ class Task2
         $inp = DateTime::createFromFormat('d-m-Y', $date);
         $cur = DateTime::createFromFormat('d-m-Y', date_create()->format('d-m-Y'));
 
-        $cur_temp = DateTime::createFromFormat('d-m-Y', date_create()->format('d-m-Y'))->modify('+1 year');
-        if ($cur_temp < $inp) {
-            throw new InvalidArgumentException('Bad input');
-        }
+        /*        $cur_temp = DateTime::createFromFormat('d-m-Y', date_create()->format('d-m-Y'))->modify('+1 year');
+                if ($cur_temp < $inp) {
+                    throw new InvalidArgumentException('Bad input');
+                }*/
 
-        return $cur->diff($inp)->format('%a');
+        return intval($cur->diff($inp)->format('%a'));
     }
 }
 
-/*$t = new Task2();
+$t = new Task2();
 echo $t->main('07-07-2022');
 echo '<br>';
 echo $t->main('09-07-2022');
 echo '<br>';
 echo $t->main('07-07-2023');
 echo '<br>';
-echo $t->main('08-07-2023');
-echo '<br>';*/
