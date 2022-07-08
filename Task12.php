@@ -16,6 +16,7 @@ class Task12
         try {
             $this->lhs = $lhs;
             $this->rhs = $rhs;
+            $this->res = 0;
         } catch (Exception $exception) {
             throw new InvalidArgumentException('Bad parameters');
         }
@@ -99,7 +100,7 @@ class Task12
     }
 }
 
-/*echo '<pre>';
-$t = new Task12('1', '3');
-echo $t->divide()->multiplyBy(6);
-echo '</pre>';*/
+//echo '<pre>';
+//$t = new Task12('1', '3');
+//echo $t->multiply()->divideBy();
+//echo '</pre>';
