@@ -68,10 +68,10 @@ class Task2
     }
 }
 
-$t = new Task2();
+/*$t = new Task2();
 echo $t->main('07-07-2022');
 echo '<br>';
 echo $t->main('09-07-2022');
 echo '<br>';
 echo $t->main('07-07-2023');
-echo '<br>';
+echo '<br>';*/
